@@ -14,8 +14,8 @@ function Initial() {
 
     return(
         <div className="relative h-screen">
-            <div className="text-white absolute top-1/2 left-1/2">AGASTUS JOYSON</div>
-            <div className="text-white absolute top-[55%] left-[48%]">FRONT END DEVELOPER</div>
+            <div className="text-white absolute text-5xl sm:text-8xl top-[35%] left-[18%] sm:left-[23%]">AGASTUS JOYSON</div>
+            <div className="text-white absolute text-xl sm:text-3xl font-medium top-[53%] sm:top-1/2 left-[13%] sm:left-[23%] italic">FRONT END DEVELOPER</div>
             <Particles
       id="tsparticles"
       init={particlesInit}

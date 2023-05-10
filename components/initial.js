@@ -1,5 +1,8 @@
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
+import { gsap } from "gsap";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 function Initial() {
 
@@ -12,10 +15,78 @@ function Initial() {
         await loadFull(main);
     };
 
+    const parent = useRef(null);
+    const name = useRef(null);
+    const desc = useRef(null);
+    const scrollIcon = useRef(null);
+
+    useEffect(() => {
+
+        let ctx = gsap.context(()=> {
+
+            let t1 = gsap.timeline();
+
+            t1.fromTo(name.current, 
+                {
+                    opacity:0,
+                    y:20
+                },
+                {
+                    opacity:1,
+                    y:0,
+                    duration:0.5,
+                    ease:"none",
+                    delay:0.5
+                }
+            );
+            t1.fromTo(desc.current,
+                {
+                    opacity:0,
+                    y:20
+                },
+                {
+                    opacity:1,
+                    y:0,
+                    duration:0.5,
+                    ease:"none"
+                }
+            );
+            t1.fromTo(scrollIcon.current,
+                {
+                    opacity:0,
+                    y:20
+                },
+                {
+                    opacity:1,
+                    y:0,
+                    duration:0.5,
+                    ease:"none"
+                }
+            );
+            t1.to(scrollIcon.current,
+                {
+                    opacity:0.4,
+                    repeat:-1,
+                    yoyo:true,
+                    duration:1
+                }
+            ); 
+        },parent);
+
+        return () => ctx.revert();
+
+    },[]);
+
     return(
-        <div className="relative h-screen">
-            <div className="text-white absolute text-5xl sm:text-8xl top-[35%] left-[18%] sm:left-[23%]">AGASTUS JOYSON</div>
-            <div className="text-white absolute text-xl sm:text-3xl font-medium top-[53%] sm:top-1/2 left-[13%] sm:left-[23%] italic">FRONT END DEVELOPER</div>
+        <div ref={parent} className="relative h-screen">
+            {/* <div ref={name} className="text-white absolute text-5xl sm:text-8xl top-[35%] left-[18%] sm:left-[23%]">AGASTUS JOYSON</div> */}
+            {/* <div ref={name} className="text-white absolute text-5xl sm:text-8xl top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">AGASTUS JOYSON</div>
+            <div ref={desc} className="text-white absolute text-xl sm:text-3xl font-medium top-[53%] sm:top-1/2 left-[13%] sm:left-[23%] italic">FRONT END DEVELOPER</div> */}
+            <div className="text-white absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] sm:w-max">
+                <div ref={name} className="text-5xl sm:text-8xl mb-5">AGASTUS JOYSON</div>
+                <div ref={desc} className="text-xl sm:text-3xl font-medium italic w-max">FRONT END DEVELOPER</div>
+            </div>
+            <div ref={scrollIcon} className="text-white sm:text-xl font-medium absolute left-1/2 translate-x-[-50%] bottom-[15%] sm:bottom-[10%]">Scroll <span className="pi pi-angle-double-down"></span></div>
             <Particles
       id="tsparticles"
       init={particlesInit}

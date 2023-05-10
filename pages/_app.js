@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import 'primeicons/primeicons.css';
 import Head from 'next/head';
 
 export default function App({ Component, pageProps }) {
